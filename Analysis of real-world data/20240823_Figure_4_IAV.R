@@ -72,11 +72,10 @@ result_7_a <- data.frame(t(apply(
 colnames(result_7_a) <- c("low_7_a", "med_7_a", "upr_7_a")
 data_concentration <- cbind(data_IAV, result_7_a)
 
-write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20240901_IAV_CA.csv")
+#write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20240901_IAV_CA.csv")
 
 
 data_ef <- data.frame(mcmc_sample["mu"])
-write.csv(x = data_ef, file = "C:/wastewater_reproduction_number/20240606_mcmc_IAV_CA.csv")
 
 # Effective reproduction number
 gamma_function <- function(x, shape, rate) {
@@ -128,7 +127,7 @@ colnames(data_result) <- c("lower", "median", "upper")
 
 data_Date <- data_stan[8:nrow(data_stan),] %>% select(date)
 data_eff_fig <- cbind(data_Date, data_result)
-write.csv(x = data_eff_fig, file = "C:/2023_R/20240901_IAV_CA_Re.csv")
+#write.csv(x = data_eff_fig, file = "C:/2023_R/20240901_IAV_CA_Re.csv")
 
 
 
@@ -168,7 +167,7 @@ data_result <- data.frame(A = summary_2_A, B = summary_2_B, C = summary_2_C)
 colnames(data_result) <- c("lower", "median", "upper")
 
 data_fig_logis <- cbind(data_ww, data_result)
-write.csv(x = data_fig_logis, file = "C:/wastewater_reproduction_number/20240901_IAV_CA_logistic.csv")
+#write.csv(x = data_fig_logis, file = "C:/wastewater_reproduction_number/20240901_IAV_CA_logistic.csv")
 
 
 
