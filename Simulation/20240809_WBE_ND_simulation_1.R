@@ -8,7 +8,7 @@ library(ggplot2)
 library(rstan)
 library(stats)
 
-data_arti <- read.csv("WBE_ND_SIR_Initialdata_used.csv")
+data_arti <- read.csv("WBE_ND_SIR_Initialdata_used.csv") #or ("WBE_ND_SIR_Initialdata_long_used")
 size <- 100 #the number of analyzed samples
 
 # SIR model
