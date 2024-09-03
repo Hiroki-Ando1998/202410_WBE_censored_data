@@ -9,8 +9,9 @@ library(rstan)
 library(stats)
 
 data_arti <- read.csv("WBE_ND_SIR_Initialdata_used.csv")
+size <- 100 #the number of analyzed samples
 
-# SIRモデル関数を定義する(βの値が途中で変わる)
+# SIR model
 sir_model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     # tが100未満の場合、100から150の間、150以上の場合でbetaの値を変更する
@@ -30,22 +31,22 @@ sir_model <- function(time, state, parameters) {
 }
 
 
-# 初期値
+# initial value
 population <- 100000
 A <- 1.652467229/population
 initial_state <- c(S = 1 - A, I = A, R = 0)
 
-# パラメータ
+# parameters
 parameters <- c(beta = 0.375, gamma = 0.25) #0.50, 0.375, 0.875 
 times <- seq(0, 250, by = 1)
 
-# モデルを解く
+# solve the SIR model
 output <- ode(y = initial_state, times = times, func = sir_model, parms = parameters)
 
 data_sim <- data.frame(output)
 
 
-#新規感染者数に変換
+#Conversion into newly infected people
 incidence <- NULL
 incidence <- A
 run <- nrow(data_sim)
@@ -67,7 +68,7 @@ data_sim_3_A <- cbind(data_sim_2, time)
 data_sim_3 <- rbind(data_arti, data_sim_3_A)
 
 
-#下水濃度に変換
+#Conversion into wastewater concentration
 data_shedding <- read.csv("WBE_ND_Assumed_shedding.csv")
 wastewater <- numeric()
 run <- nrow(data_sim_3)-1
@@ -82,7 +83,7 @@ for(i in 26:run){
 data_waste <- data.frame(wastewater)
 
 
-#測定誤差を組み込む
+#Add measurement error
 measured_ww <- c(0)
 run_2 <- nrow(data_waste)
 for(i in 2:run_2){
@@ -93,7 +94,7 @@ for(i in 2:run_2){
 data_measured_ww <- data.frame(measured_ww)
 data_waste_2 <- cbind(data_waste, data_measured_ww)
 
-#データの統合
+#Integration of data
 zeros_1 <- rep(0,23)
 zeros_1_b <- rep(0,25)
 zeros_2 <- rep(0,1)
@@ -124,7 +125,7 @@ data_sim_final_4 <- data_sim_final_3 %>% mutate(logWW = log10(wastewater))
 
 
 
-
+#logistic regression model
 #10% detection probability at 100 copies (a1, b1)
 #50% detection probability at 500 copies (a2, b2)
 a1 <- 0.10
@@ -138,7 +139,6 @@ c1 <- -c2*log10(b2)
 c_test <- 0.95
 c095 <- (log(c_test/(1-c_test))-c1)/c2 #LOD (95% detection)
 
-size <- 100 #the number of analyzed samples
 p3 <- c()
 for(i in 1:nrow(data_sim_final_4)){
   A <- data_sim_final_4$logWW[i]
@@ -158,7 +158,6 @@ colnames(data_sim_final_6) <- c("time", "incidence_2", "wastewater","measured_ww
 #Rstan modeling
 #7 day sampling
 data_stan <- data_sim_final_6
-#write.csv(x = data_stan, file = "C:/WBE_ND/WBE_ND_SIR_analyzed_data.csv")
 sample_size <- nrow(data_stan)
 
 threshold <- size*0.8 #threshold to selecting data on quantified concentration 
@@ -296,20 +295,14 @@ data_result_analyzed <- cbind(data_stan_true, result_7, result_3, result_1)
 
 data_cal_1 <- data_result_analyzed %>% filter(logWW <= log10(b2)) #or log10(b2)
 data_cal_2 <- data_cal_1 %>% mutate(error_7 = abs(logWW - med_7)/logWW, error_3 = abs(logWW - med_3)/logWW, error_1 = abs(logWW - med_1)/logWW)
-data_cal_3 <- data_cal_2 %>% mutate(abs_7 = abs(logWW - med_7), abs_3 = abs(logWW - med_3), abs_1 = abs(logWW - med_1))
 mrb_7 <- sum(data_cal_2$error_7)/nrow(data_cal_2)
 mrb_3 <- sum(data_cal_2$error_3)/nrow(data_cal_2)
 mrb_1 <- sum(data_cal_2$error_1)/nrow(data_cal_2)
 
-abs_7 <- sum(data_cal_3$abs_7)/nrow(data_cal_3)
-abs_3 <- sum(data_cal_3$abs_3)/nrow(data_cal_3)
-abs_1 <- sum(data_cal_3$abs_1)/nrow(data_cal_3)
 
 print(mrb_7)
 print(mrb_3)
 print(mrb_1)
 
-print(abs_7)
-print(abs_3)
-print(abs_1)
+
 
