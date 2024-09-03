@@ -75,8 +75,6 @@ write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/2024
 
 
 data_ef <- data.frame(mcmc_sample["mu"])
-write.csv(x = data_ef, file = "C:/wastewater_reproduction_number/20240606_mcmc_RSV_CA.csv")
-
 
 
 # Effective reproduction number
