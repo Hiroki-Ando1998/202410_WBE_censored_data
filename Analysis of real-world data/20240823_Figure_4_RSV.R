@@ -69,14 +69,11 @@ result_7_a <- data.frame(t(apply(
 )))
 
 colnames(result_7_a) <- c("low_7_a", "med_7_a", "upr_7_a")
-data_concentration <- cbind(data_IAV, result_7_a)
+data_concentration <- cbind(data_RSV, result_7_a)
 
-write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20240901_RSV_CA.csv")
-
+#write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20240901_RSV_CA.csv")
 
 data_ef <- data.frame(mcmc_sample["mu"])
-write.csv(x = data_ef, file = "C:/wastewater_reproduction_number/20240606_mcmc_RSV_CA.csv")
-
 
 
 # Effective reproduction number
@@ -99,7 +96,7 @@ sample_size_2 <- nrow(data_ef)
 summary_2_A <- NULL
 summary_2_B <- NULL
 summary_2_C <- NULL
-for (i in 8:nrow(data_stan)){
+for (i in 15:nrow(data_stan)){
   p_estimate_2 <- NULL   
   for(m in 1:sample_size_2){
     RSV <- 10^(data_ef[m,i]) #m行目i列目
@@ -108,13 +105,13 @@ for (i in 8:nrow(data_stan)){
     RSV_5 <- 10^(data_ef[m,i-5])
     RSV_6 <- 10^(data_ef[m,i-6])
     RSV_7 <- 10^(data_ef[m,i-7])
-    RSV_8 <- 10^(data_ef[m,i-1])
-    RSV_9 <- 10^(data_ef[m,i-2])
-    RSV_10 <- 10^(data_ef[m,i-3])
-    RSV_11 <- 10^(data_ef[m,i-4])
-    RSV_12 <- 10^(data_ef[m,i-5])
-    RSV_13 <- 10^(data_ef[m,i-6])
-    RSV_14 <- 10^(data_ef[m,i-7])
+    RSV_8 <- 10^(data_ef[m,i-8])
+    RSV_9 <- 10^(data_ef[m,i-9])
+    RSV_10 <- 10^(data_ef[m,i-10])
+    RSV_11 <- 10^(data_ef[m,i-11])
+    RSV_12 <- 10^(data_ef[m,i-12])
+    RSV_13 <- 10^(data_ef[m,i-13])
+    RSV_14 <- 10^(data_ef[m,i-14])
     
     p_estimate <- RSV/(RSV_3*gamma_prob$prob[3] + RSV_4*gamma_prob$prob[4] + RSV_5*gamma_prob$prob[5] + RSV_6*gamma_prob$prob[6] + RSV_7*gamma_prob$prob[7]
                       + RSV_8*gamma_prob$prob[8] + RSV_9*gamma_prob$prob[9] + RSV_10*gamma_prob$prob[10] + RSV_11*gamma_prob$prob[11] + RSV_12*gamma_prob$prob[12]
@@ -133,9 +130,9 @@ for (i in 8:nrow(data_stan)){
 data_result <- data.frame(A = summary_2_A, B = summary_2_B, C = summary_2_C)
 colnames(data_result) <- c("lower", "median", "upper")
 
-data_Date <- data_stan[13:nrow(data_stan),] %>% select(date)
+data_Date <- data_stan[15:nrow(data_stan),] %>% select(date)
 data_eff_fig <- cbind(data_Date, data_result)
-write.csv(x = data_eff_fig, file = "C:/2023_R/20230901_RSV_CA_Re.csv")
+#write.csv(x = data_eff_fig, file = "C:/2023_R/20230901_RSV_CA_Re.csv")
 
 
 
@@ -173,7 +170,7 @@ data_result <- data.frame(A = summary_2_A, B = summary_2_B, C = summary_2_C)
 colnames(data_result) <- c("lower", "median", "upper")
 
 data_fig_logis <- cbind(data_ww, data_result)
-write.csv(x = data_fig_logis, file = "C:/wastewater_reproduction_number/20240901_RSV_CA_logistic.csv")
+#write.csv(x = data_fig_logis, file = "C:/wastewater_reproduction_number/20240901_RSV_CA_logistic.csv")
 
 
 
