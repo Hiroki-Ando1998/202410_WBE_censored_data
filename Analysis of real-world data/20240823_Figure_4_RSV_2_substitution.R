@@ -19,7 +19,7 @@ colnames(data_RSV) <- c("date", "count", "positive", "concentration", "substitut
 threshold <- 0.8 #threshold to selecting data on quantified concentration 
 
 #state-spce model without logistic
-data_stan <- data_IAV
+data_stan <- data_RSV
 sample_size <- nrow(data_stan)
 
 #vector of row number used for the analysis
