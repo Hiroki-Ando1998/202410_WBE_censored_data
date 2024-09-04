@@ -65,11 +65,11 @@ result_7_a <- data.frame(t(apply(
 colnames(result_7_a) <- c("low_7_a", "med_7_a", "upr_7_a")
 data_concentration <- cbind(data_RSV, result_7_a)
 
-#write.csv(x = data_concentration, file = "/home/u31/hirokiando/20240901_RSV_CA.csv")
+#write.csv(x = data_concentration, file = "/home/u31/hirokiando/20240902_RSV_CA.csv")
 
 
 data_ef <- data.frame(mcmc_sample["mu"])
-#write.csv(x = data_ef, file = "/home/u31/hirokiando/20240606_mcmc_RSV_CA.csv")
+#write.csv(x = data_ef, file = "/home/u31/hirokiando/20240902_mcmc_RSV_CA.csv")
 
 
 
@@ -129,7 +129,7 @@ colnames(data_result) <- c("lower", "median", "upper")
 
 data_Date <- data_stan[15:nrow(data_stan),] %>% select(date)
 data_eff_fig <- cbind(data_Date, data_result)
-write.csv(x = data_eff_fig, file = "/home/u31/hirokiando/20230901_RSV_CA_Re.csv")
+write.csv(x = data_eff_fig, file = "/home/u31/hirokiando/20230902_RSV_CA_Re.csv")
 
 
 
