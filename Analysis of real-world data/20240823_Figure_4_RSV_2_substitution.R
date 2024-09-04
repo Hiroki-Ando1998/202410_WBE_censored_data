@@ -38,7 +38,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 mcmc <- stan(
-  file = "20240809_stat_space_real_data.stan", 
+  file = "20240809_stat_space_real_substituion_data.stan", 
   data = data_list_ww,
   seed = 1,
   chain = 4,
