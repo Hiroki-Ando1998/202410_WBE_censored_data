@@ -58,7 +58,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 mcmc <- stan(
-  file = "stat_space_model_with_logistic.stan", 
+  file = "state_space_model_with_logistic.stan", 
   data = data_list_ww,
   seed = 1,
   chain = 4,
