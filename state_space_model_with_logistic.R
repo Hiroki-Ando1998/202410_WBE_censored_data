@@ -116,10 +116,6 @@ plot
 write.csv(x = data_estimated_concentration, file = "C:/XXXX/2024XXXX_XX_XX.csv") 
 
 
-data_ef <- data.frame(mcmc_sample["mu"])
-write.csv(x = data_ef, file = "C:/wastewater_reproduction_number/20240606_mcmc_IAV_CA.csv")
-
-
 
 
 
