@@ -25,7 +25,7 @@ data_1 <- read.csv("template_file.csv") #change the name of csv file
 data <- data_1
 data <- data %>% mutate(log_concentration = log10(concentration))
 data <- data %>% mutate(date = as.Date(date))
-data <- data %>% select("date", "number_of_tested_samples", "number_of_positive_samples", "concentration", "log_concentration")
+data <- data %>% select("date", "number_of_tested_samples", "number_of_positive_samples", "log_concentration")
 colnames(data) <- c("date", "count", "positive", "concentration")
 
 
@@ -63,7 +63,7 @@ mcmc <- stan(
   seed = 1,
   chain = 4,
   iter = 200000,
-  warmup = 10000,
+  warmup = 100000,
   thin = 4
 )
 
