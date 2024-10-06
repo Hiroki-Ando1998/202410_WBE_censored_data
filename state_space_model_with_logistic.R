@@ -94,7 +94,7 @@ data_fig <- data_fig %>% mutate(posi = if_else(count < 1, "no", if_else(positive
 plot <- ggplot(data_fig, aes(x = as.Date(date)))
 plot <- plot + geom_point(aes(y = concentration, color = posi, shape = posi))
 plot <- plot + scale_shape_manual(values = c(24, 16))
-plot <- plot + scale_color_manual(values = c("#FEC44F","#0570B0"))
+plot <- plot + scale_color_manual(values = c("#FEC44F","#0570B0")) #no: yellow, yes: blue
 plot <- plot + geom_ribbon(aes(ymin = low, ymax = upr), fill = "#3690C0", alpha = 0.3)
 plot <- plot + geom_line(aes(y = median), color = "#0570B0", size = 1) 
 plot <- plot + labs(x = "Date", y = "wastewater concentration")
