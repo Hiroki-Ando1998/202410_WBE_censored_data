@@ -88,7 +88,7 @@ data_estimated_concentration <- cbind(data, result)
 
 
 #figure
-data_fig <- data_data_estimated_concentration
+data_fig <- data_estimated_concentration
 data_fig <- data_fig %>% mutate(posi = if_else(count < 1, "no", if_else(positive >= threshold*count, "yes", "no")))
 
 plot <- ggplot(data_fig, aes(x = as.Date(date)))
