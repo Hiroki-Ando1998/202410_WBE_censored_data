@@ -21,8 +21,8 @@ data {
 // accepts two parameters 'mu' and 'sigma'.
 parameters {
   vector[n_all] mu;
-  real<lower=0> s1;
-  real<lower=0> s2;
+  real<lower=0.0001> s1;
+  real<lower=0.0001> s2;
 }
 
 // The model to be estimated. We model the output
