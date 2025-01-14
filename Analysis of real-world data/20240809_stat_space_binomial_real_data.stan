@@ -11,8 +11,8 @@ data {
 
 parameters {
   vector[n_all] mu;
-  real<lower=0> s1;
-  real<lower=0> s2;
+  real<lower=0.0001> s1;
+  real<lower=0.0001> s2;
   real c1;
   real <lower=0> c2;
 }
@@ -24,7 +24,7 @@ model {
   
   // Priors
   mu ~ normal(3, 5);  // Changed from mean 2 to 0 for generality
-  s1 ~ normal(0, 1/5);
+  s1 ~ normal(0, 0.2);
   s2 ~ normal(0, 1.5);
   c1 ~ normal(-10, 10);  // Changed mean from -1 to 0 for generality
   c2 ~ normal(3, 5);  // Changed mean from 1 to 0 for generality
