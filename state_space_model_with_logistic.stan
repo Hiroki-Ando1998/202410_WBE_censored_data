@@ -11,8 +11,8 @@ data {
 
 parameters {
   vector[n_all] mu;
-  real<lower=0> s1;
-  real<lower=0> s2;
+  real<lower=0.0001> s1;
+  real<lower=0.0001> s2;
   real c1;
   real <lower=0> c2;
 }
