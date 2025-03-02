@@ -32,7 +32,7 @@ transformed parameters{
      c1 = -22 + 5*c1_raw;
   
     real c2;
-    c2 = 6 + 3*c2_raw;
+    c2 = exp(1+c2_raw);
 
 }
 
