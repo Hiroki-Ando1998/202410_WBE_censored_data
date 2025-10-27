@@ -1,9 +1,6 @@
 ## Protocols
 
-1. Download "Brief guide for using the state-space model.pdf"
-2. Download "State_space_model_with_logistic_highspped.R" & "State_space_model_with_logistic_highspped.stan" & "template_file.csv"
-
-1. Download [Brief Guide](https://qiita.com/s-yonekura/items/51d5128f9ff525094ac6)
+1. Download [Brief Guide](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/Brief%20guide%20for%20using%20the%20state-space%20model.pdf)
 2. Download [R code](),[Stan code](), and [CSV file]()
 3. 
 Download
