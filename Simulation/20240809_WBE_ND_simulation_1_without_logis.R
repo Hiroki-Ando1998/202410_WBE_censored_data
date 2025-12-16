@@ -132,7 +132,7 @@ b1 <- 300
 a2 <- 0.5
 b2 <- b1*4
 
-size <- 3 #the number of analyzed samples
+
 threshold <- size*0.8 #threshold to selecting data on quantified concentration 
 c2 <- log(a1/(1-a1))/(log10(b1)-log10(b2))
 c1 <- -c2*log10(b2) 
@@ -140,7 +140,7 @@ c1 <- -c2*log10(b2)
 c_test <- 0.95
 c095 <- (log(c_test/(1-c_test))-c1)/c2 #LOD (95% detection)
 
-
+size <- 3 #the number of analyzed samples
 p3 <- c()
 for(i in 1:nrow(data_sim_final_4)){
   A <- data_sim_final_4$logWW[i]
@@ -152,9 +152,9 @@ for(i in 1:nrow(data_sim_final_4)){
 data_test <- data.frame(ND = p3)
 data_sim_final_5 <- cbind(data_sim_final_4, data_test)
 
-data_sim_final_6 <- data_sim_final_5[20:150,]#250
-colnames(data_sim_final_6) <- c("time", "incidence_2", "wastewater","measured_ww", "logWW", "ND")
-data_sim_final_6 <- data_sim_final_6 %>% mutate(logWW_rep = if_else(ND >= threshold, logWW, log10(b2)))
+data_sim_final_6_1 <- data_sim_final_5[20:150,] #250, 150, 140, 128
+colnames(data_sim_final_6_1) <- c("time", "incidence_2", "wastewater","measured_ww", "logWW", "ND")
+data_sim_final_6 <- data_sim_final_6_1 %>% mutate(substituion = ((logWW*ND+log10(b2)*(3-ND))/3))
 
 
 #Rstan modeling
@@ -170,14 +170,14 @@ sample_size_CD <- nrow(data_row_CD)
 data_row_D <- data.frame(detected = which(data_stan$ND >= threshold)) #pick row numbers of detected data
 sample_size_D <- nrow(data_row_D)
 
-data_ww <- data_stan %>% filter(ND >= threshold)
-ww <- data_ww$logWW #logWW_rep
+data_ww <- data_stan #%>% filter(ND >= threshold)
+ww <- data_ww$substituion #logWW_rep
 print(1-nrow(data_ww)/nrow(data_stan))
 data_nd <- data_stan %>% drop_na(ND)
 ND <- data_nd$ND
 
-data_list_ww <- list(n_all = sample_size, n_d = sample_size_D,
-                     ww = ww, row_d = data_row_D$detected, size = size)
+data_list_ww <- list(n_all = sample_size, n_d = sample_size_CD,
+                     ww = ww, row_d = data_row_CD$true, size = size)
 
 mcmc_7 <- stan(
   file = "20240809_stat_space_1.stan", 
@@ -307,4 +307,5 @@ print(mrb_3)
 print(mrb_1)
 
 head(data_result_analyzed, 120)
+
 
