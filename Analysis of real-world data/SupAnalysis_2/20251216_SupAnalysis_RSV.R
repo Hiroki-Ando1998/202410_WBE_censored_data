@@ -44,7 +44,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 mcmc <- stan(
-  file = "20240809_stat_space_binomial_real_data.stan", 
+  file = "20240809_stat_space_binomial_real_data_CA.stan", 
   data = data_list_ww,
   seed = 1,
   chain = 4,
@@ -71,7 +71,7 @@ result_7_a <- data.frame(t(apply(
 colnames(result_7_a) <- c("low_7_a", "med_7_a", "upr_7_a")
 data_concentration <- cbind(data_RSV, result_7_a)
 
-#write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20240901_RSV_CA.csv")
+#write.csv(x = data_concentration, file = "C:/wastewater_reproduction_number/20251215_RSV_CA.csv")
 
 data_ef <- data.frame(mcmc_sample["mu"])
 
@@ -132,59 +132,10 @@ colnames(data_result) <- c("lower", "median", "upper")
 
 data_Date <- data_stan[15:nrow(data_stan),] %>% select(date)
 data_eff_fig <- cbind(data_Date, data_result)
-#write.csv(x = data_eff_fig, file = "C:/2023_R/20230901_RSV_CA_Re.csv")
+#write.csv(x = data_eff_fig, file = "C:/2023_R/20251215_RSV_CA_Re.csv")
 
 
 
 
-#logistic function
-mcmc_sample <- rstan::extract(mcmc)
-data_ef_c1 <- data.frame(mcmc_sample["c1"])
-data_ef_c2 <- data.frame(mcmc_sample["c2"])
-
-ww <- 2 * 1.1^(0:(140-1))
-data_ww <- data.frame(ww = ww)
-sample_size_2 <- nrow(data_ef_c1)
-summary_2_A <- NULL
-summary_2_B <- NULL
-summary_2_C <- NULL
-for (i in 1:nrow(data_ww)){
-  p_estimate_2 <- NULL   
-  for(m in 1:sample_size_2){
-    c1_1 <- data_ef_c1[m,1] #m行目i列目
-    c2_1 <- data_ef_c2[m,1]
-    
-    p_estimate <- 1 / (1 + exp(-c1_1 -c2_1 * log10(data_ww$ww[i])))
-    p_estimate_2 <- c(p_estimate_2, p_estimate)
-  }
-  summary <- quantile(p_estimate_2, probs = c(0.025, 0.5, 0.975))
-  summary_A <- quantile(p_estimate_2, probs = c(0.025))
-  summary_B <- quantile(p_estimate_2, probs = c(0.5))
-  summary_C <- quantile(p_estimate_2, probs = c(0.975))
-  
-  summary_2_A <- c(summary_2_A, summary_A)
-  summary_2_B <- c(summary_2_B, summary_B)
-  summary_2_C <- c(summary_2_C, summary_C)
-}
-data_result <- data.frame(A = summary_2_A, B = summary_2_B, C = summary_2_C)
-colnames(data_result) <- c("lower", "median", "upper")
-
-data_fig_logis <- cbind(data_ww, data_result)
-#write.csv(x = data_fig_logis, file = "C:/wastewater_reproduction_number/20240901_RSV_CA_logistic.csv")
-
-
-
-plot <- ggplot(data_fig_logis, aes(x = log10(ww))) 
-plot <- plot + geom_ribbon(aes(ymin = lower, ymax = upper), fill = "#3690C0", alpha = 0.3) 
-plot <- plot + geom_line(aes(y = median), color = "#0570B0", size = 1) 
-plot <- plot + labs(x = "wastewater concentration", y = "detection probability")
-plot <- plot + theme_classic()
-plot <- plot + theme(
-  axis.line = element_line(linewidth = 1.0, lineend = "square"),
-  text = element_text(colour ="black", size = 14),
-  legend.position = "none",
-  axis.ticks = element_line(linewidth = 1.5),
-  axis.ticks.length = unit(-2, "mm"))
-plot
 
 
