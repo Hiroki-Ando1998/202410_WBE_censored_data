@@ -10,24 +10,34 @@ data {
 }
 
 parameters {
-  vector[n_all] mu;
-  real<lower=0.0001> s1;
-  real<lower=0.0001> s2;
-  real c1;
-  real <lower=0> c2;
+  vector<lower=-4, upper=4>[n_all] mu_raw;
+  real<lower=-4, upper=4> s1_raw;
+  real<lower=-4, upper=4> s2_raw;
 }
 
-model {
-  int x1[n_cd];
-  int x2[n_d];
-  real p[n_all];
+transformed parameters{
+      vector[n_all] mu;
+  for (i in 1:n_all) {
+    mu[i] = 3.5 + 1.5 * mu_raw[i];
+  }
+    real s1;
+    s1 = exp(s1_raw - 2);
+    
+    real s2;
+    s2 = exp(s2_raw - 2);
   
+    real c1 = -23.40;
+  
+    real c2 = 7.09;
+
+}
+
+
+model {
   // Priors
-  mu ~ normal(3, 5);  // Changed from mean 2 to 0 for generality
-  s1 ~ normal(0, 0.2);
-  s2 ~ normal(0, 1.5);
-  c1 ~ normal(-10, 10);  // Changed mean from -1 to 0 for generality
-  c2 ~ normal(3, 5);  // Changed mean from 1 to 0 for generality
+  mu_raw ~ normal(0, 1);
+  s1_raw ~ normal(0, 1);
+  s2_raw ~ normal(0, 1);
   
   // Compute probabilities using the logistic function
   for (i in 3:n_all) {
@@ -50,6 +60,7 @@ model {
     nd[k1] ~ binomial(n_count[k1], p[x1[k1]]);
   }
 }
+
 
 
 
