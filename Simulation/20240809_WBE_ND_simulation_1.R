@@ -150,8 +150,10 @@ for(i in 1:nrow(data_sim_final_4)){
 data_test <- data.frame(ND = p3)
 data_sim_final_5 <- cbind(data_sim_final_4, data_test)
 
-data_sim_final_6 <- data_sim_final_5[20:150,] #250, 150, 140, 128
-colnames(data_sim_final_6) <- c("time", "incidence_2", "wastewater","measured_ww", "logWW", "ND")
+data_sim_final_6_1 <- data_sim_final_5[20:150,] #250, 150, 140, 128
+colnames(data_sim_final_6_1) <- c("time", "incidence_2", "wastewater","measured_ww", "logWW", "ND")
+data_sim_final_6 <- data_sim_final_6_1 %>% mutate(substituion = ((logWW*ND+log10(b2)*(3-ND))/3))
+
 
 
 
@@ -303,6 +305,7 @@ mrb_1 <- sum(data_cal_2$error_1)/nrow(data_cal_2)
 print(mrb_7)
 print(mrb_3)
 print(mrb_1)
+
 
 
 
