@@ -26,9 +26,9 @@ transformed parameters{
     real s2;
     s2 = exp(s2_raw - 2);
   
-    real c1 = -23.40;
+    real c1 = -21.59;
   
-    real c2 = 7.09;
+    real c2 = 5.93;
 
 }
 
@@ -60,6 +60,7 @@ model {
     nd[k1] ~ binomial(n_count[k1], p[x1[k1]]);
   }
 }
+
 
 
 
