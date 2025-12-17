@@ -12,7 +12,7 @@
 2. [Result_estimated_wastewaterconcentration](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_Demonstration_wastewaterconcentration.csv)
 
 
-<img width="700" height="600" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
+<img width="700" height="300" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
 The yellow plots represent wastewater concentrations on days with non-detection observations, whereas the blue plots represent concentrations on days when all samples were successfully detected.  
 
 
