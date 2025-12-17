@@ -24,3 +24,11 @@
 
 
 <img width="513" height="144" alt="image" src="https://github.com/user-attachments/assets/a9573ed1-0943-414d-baa3-7309858eaa29" />
+
+
+C1 and C2 are parameters of the logistic model
+<br><br><br>
+S1 is a parameter for a state formula
+<br><br><br>
+S2 is a parameter representing a measurment error
+
