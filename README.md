@@ -8,4 +8,4 @@
 
 
 ### Demonstration
-1. [Toy Data](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/Brief%20guide%20for%20using%20the%20state-space%20model.pdf)
+1. [Toy Data](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Demonstration_toydata.csv)
