@@ -13,7 +13,9 @@
 
 
 <img width="700" height="600" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
-The <span style="color:gold;">yellow plots</span> represent wastewater concentrations on days with non-detection observations, whereas the <span style="color:blue;">blue plots</span> represent concentrations on days when all samples were successfully detected.
+🟡 Yellow plots represent wastewater concentrations on days with non-detection observations.  
+🔵 Blue plots represent concentrations on days when all samples were successfully detected.
+
 
 
 
