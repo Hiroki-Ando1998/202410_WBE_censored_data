@@ -18,7 +18,7 @@
 🟡 Yellow plots represent wastewater concentrations on days with non-detection observations.
 
 
-🔵 Blue plots represent concentrations on days when all samples were successfully detected.
+🔵 Blue plots represent concentrations on days when all samples were successfully detected
 <br><br><br>
 **Estimated parameters**
 
