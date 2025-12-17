@@ -19,8 +19,8 @@ library(rstan)
 library(stats)
 library(bayesplot)
 
-threshold <- 0.8 #threshold for detection rate to select data on quantified concentration 
-data_1 <- read.csv("template_file.csv") #change the name of csv file
+threshold <- 0.8 
+data_1 <- read.csv("Demonstration_toydata.csv") #change the name of csv file
 
 
 
@@ -176,6 +176,7 @@ plot
 #confirm the place where file should be loaded by using "getwd()": "C:/XXXX/"
 #Write file name: "2024xxxx_xx_xx,csv"
 write.csv(x = data_fig_logis, file = "C:/XXXX/2024XXXX_XX_XX.csv")
+
 
 
 
