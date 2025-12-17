@@ -13,7 +13,7 @@
 1. [Toy Data](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Demonstration_toydata.csv), [R code](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/state_space_model_with_logistic_highspeed.R), [stan code](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/state_space_model_with_logistic_highspeed.stan)  
 2. [Result_estimated_wastewaterconcentration](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_Demonstration_wastewaterconcentration.csv)
 
-
+**Estimated wastwater concentration (log10 copies/L)**
 <img width="700" height="600" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
 🟡 Yellow plots represent wastewater concentrations on days with non-detection observations.
 
@@ -21,5 +21,5 @@
 🔵 Blue plots represent concentrations on days when all samples were successfully detected.
 <br><br><br>
 
-3. Estimated parameters
+**Estimated parameters**
 <img width="513" height="144" alt="image" src="https://github.com/user-attachments/assets/a9573ed1-0943-414d-baa3-7309858eaa29" />
