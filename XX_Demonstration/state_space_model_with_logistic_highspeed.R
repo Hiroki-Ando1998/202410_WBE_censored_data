@@ -87,7 +87,18 @@ result <- data.frame(t(apply(
 )))
 
 colnames(result) <- c("low", "median", "upr")
-data_estimated_concentration <- cbind(data, result)
+
+state_name <- "generated_ww_observed"
+result_2 <- data.frame(t(apply(
+  X = mcmc_sample[[state_name]],
+  MARGIN = 2,
+  FUN = quantile,
+  probs = c(0.025, 0.5, 0.975) #credible interval can be changed
+)))
+
+colnames(result_2) <- c("low_observed", "median_observed", "upr_observed")
+
+data_estimated_concentration <- cbind(data, result, result_2)
 
 
 #figure
@@ -98,7 +109,8 @@ plot <- ggplot(data_fig, aes(x = as.Date(date)))
 plot <- plot + geom_point(aes(y = concentration, color = posi, shape = posi))
 plot <- plot + scale_shape_manual(values = c(24, 16))
 plot <- plot + scale_color_manual(values = c("#FEC44F","#0570B0")) #no: yellow, yes: blue
-plot <- plot + geom_ribbon(aes(ymin = low, ymax = upr), fill = "#3690C0", alpha = 0.3)
+plot <- plot + geom_ribbon(aes(ymin = low_observed, ymax = upr_observed), fill = "#0570B0", alpha = 0.2) #Estimation of observed wastewater concentration
+plot <- plot + geom_ribbon(aes(ymin = low, ymax = upr), fill = "#3690C0", alpha = 0.4) #estiamtion of wastewater concentration without measurement errors
 plot <- plot + geom_line(aes(y = median), color = "#0570B0", size = 1) 
 plot <- plot + labs(x = "Date", y = "wastewater concentration")
 plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2022-10-01")), date_breaks = "2 months", date_labels = "%b") #change the date
@@ -111,6 +123,7 @@ plot <- plot + theme(
   axis.ticks = element_line(linewidth = 1.0),
   axis.ticks.length = unit(-2, "mm"))
 plot
+
 
 
 #Export estimation result
@@ -176,6 +189,7 @@ plot
 #confirm the place where file should be loaded by using "getwd()": "C:/XXXX/"
 #Write file name: "2024xxxx_xx_xx,csv"
 write.csv(x = data_fig_logis, file = "C:/XXXX/2024XXXX_XX_XX.csv")
+
 
 
 
