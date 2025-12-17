@@ -13,6 +13,7 @@
 
 
 <img width="700" height="600" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
+The yellow plots represent wastewater concentrations on days with non-detection observations, whereas the blue plots represent concentrations on days when all samples were successfully detected.
 
 3. Estimated parameters
 <img width="513" height="144" alt="image" src="https://github.com/user-attachments/assets/a9573ed1-0943-414d-baa3-7309858eaa29" />
