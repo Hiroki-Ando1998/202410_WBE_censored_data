@@ -19,6 +19,10 @@
 
 
 🔵 Blue plots represent concentrations on days when all samples were successfully detected
+
+※　The thick blue shadow represents 95 credible intervals of estimated wastewater concentration (i.e., without measurment errors)
+
+※　The light blue shadow represents 95 credible intervals of predicted wastewater concentration (i.e., with measurment errors)
 <br><br><br>
 **Estimated parameters**
 
