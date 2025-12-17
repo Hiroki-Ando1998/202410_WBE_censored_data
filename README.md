@@ -31,7 +31,7 @@
 
 C1 and C2 are parameters of the logistic model
 
-S1 is a parameter for a state formula
+S1 is a parameter for the state formula of the state-space model
 
-S2 is a parameter representing a measurment error
+S2 is a parameter representing the measurment error
 
