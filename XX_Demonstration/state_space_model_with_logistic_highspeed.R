@@ -101,8 +101,8 @@ plot <- plot + scale_color_manual(values = c("#FEC44F","#0570B0")) #no: yellow, 
 plot <- plot + geom_ribbon(aes(ymin = low, ymax = upr), fill = "#3690C0", alpha = 0.3)
 plot <- plot + geom_line(aes(y = median), color = "#0570B0", size = 1) 
 plot <- plot + labs(x = "Date", y = "wastewater concentration")
-plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b") #change the date
-plot <- plot + scale_y_continuous(limits = c(2.0, 5.5), breaks = seq(2.0, 5.5, 1)) #change the scale of y axis
+plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2022-10-01")), date_breaks = "2 months", date_labels = "%b") #change the date
+plot <- plot + scale_y_continuous(limits = c(2.5, 4.5), breaks = seq(2.5, 4.5, 1)) #change the scale of y axis
 plot <- plot + theme_bw()
 plot <- plot + theme(
   axis.line = element_line(linewidth = 1.0, lineend = "square"),
@@ -176,6 +176,7 @@ plot
 #confirm the place where file should be loaded by using "getwd()": "C:/XXXX/"
 #Write file name: "2024xxxx_xx_xx,csv"
 write.csv(x = data_fig_logis, file = "C:/XXXX/2024XXXX_XX_XX.csv")
+
 
 
 
