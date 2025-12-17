@@ -9,3 +9,5 @@
 
 ### Demonstration
 1. [Toy Data](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Demonstration_toydata.csv), [R code](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/state_space_model_with_logistic_highspeed.R), [stan code](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/state_space_model_with_logistic_highspeed.stan)
+2. [Result](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Demonstration_toydata.csv)
+
