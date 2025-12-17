@@ -6,7 +6,8 @@
 ### How to download files from GitHub
 <img width="1131" height="395" alt="image" src="https://github.com/user-attachments/assets/127c26ba-17ad-4bb7-9785-8ddd7467b791" />
 
-
+<br><br><br>
+<br><br><br>
 
 
 ### Demonstration
@@ -20,11 +21,8 @@
 
 🔵 Blue plots represent concentrations on days when all samples were successfully detected.
 
-
-
-
-
-
+<br><br><br>
+<br><br><br>
 
 3. Estimated parameters
 <img width="513" height="144" alt="image" src="https://github.com/user-attachments/assets/a9573ed1-0943-414d-baa3-7309858eaa29" />
