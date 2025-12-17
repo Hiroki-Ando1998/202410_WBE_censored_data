@@ -19,7 +19,6 @@
 
 
 🔵 Blue plots represent concentrations on days when all samples were successfully detected.
-
 <br><br><br>
 
 3. Estimated parameters
