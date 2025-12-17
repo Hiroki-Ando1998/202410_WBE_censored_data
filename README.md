@@ -5,3 +5,7 @@
 
 ### How to download files from GitHub
 <img width="1131" height="395" alt="image" src="https://github.com/user-attachments/assets/127c26ba-17ad-4bb7-9785-8ddd7467b791" />
+
+
+### Demonstration
+1. [Toy Data](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/Brief%20guide%20for%20using%20the%20state-space%20model.pdf)
