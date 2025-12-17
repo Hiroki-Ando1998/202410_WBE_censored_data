@@ -1,13 +1,12 @@
 
 setwd("C:/WBE_ND")
 
-library(deSolve)
+
 library(dplyr)
 library(tidyr)
 library(plyr)
 library(ggplot2)
-library(rstan)
-library(stats)
+library(cowplot)
 
 
 data_IAV_CA <- read.csv("20251214_IAV_CA_ww.csv")
@@ -30,30 +29,30 @@ data_RSV_R_FL <- read.csv("20251214_RSV_FL_Reww.csv")
 #--------------------------------------------------------------------------------------------------------------------------------------Reww
 
 #California
-plot <- ggplot(data_IAV_R_CA, aes(x = as.Date(date)))
-plot <- plot + geom_ribbon(aes(ymin = low_ocean, ymax = upr_ocean), fill = "#3690C0", alpha = 0.2)  
-plot <- plot + geom_ribbon(aes(ymin = low_palo, ymax = upr_palo), fill = "#FEE391", alpha = 0.2)
-plot <- plot + geom_ribbon(aes(ymin = low_san, ymax = upr_san), fill = "#BD0026", alpha = 0.2)  
-plot <- plot + geom_ribbon(aes(ymin = low_silicon, ymax = upr_silicon), fill = "#016C59", alpha = 0.2)
-plot <- plot + geom_ribbon(aes(ymin = low_south, ymax = upr_south), fill = "#6A51A3", alpha = 0.2)  
-plot <- plot + geom_ribbon(aes(ymin = low_sunny, ymax = upr_sunny), fill = "#A6BDDB", alpha = 0.2)
-plot <- plot + geom_line(aes(y = med_ocean), color = "#0570B0", size = 1) 
-plot <- plot + geom_line(aes(y = med_palo), color = "#FEC44F", size = 1) 
-plot <- plot + geom_line(aes(y = med_san), color = "#BD0026", size = 1) 
-plot <- plot + geom_line(aes(y = med_silicon), color = "#74C476", size = 1) 
-plot <- plot + geom_line(aes(y = med_south), color = "#6A51A3", size = 1) 
-plot <- plot + geom_line(aes(y = med_sunny), color = "#2B8CBE", size = 1) 
-plot <- plot + labs(y = "wastewater-based Re", x = "Date")
-plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
-plot <- plot + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
-plot <- plot + theme_bw()
-plot <- plot + theme(
+plot_CA <- ggplot(data_RSV_R_CA, aes(x = as.Date(date)))
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_ocean, ymax = upr_ocean), fill = "#3690C0", alpha = 0.2)  
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_palo, ymax = upr_palo), fill = "#FEE391", alpha = 0.2)
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_san, ymax = upr_san), fill = "#BD0026", alpha = 0.2)  
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_silicon, ymax = upr_silicon), fill = "#016C59", alpha = 0.2)
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_south, ymax = upr_south), fill = "#6A51A3", alpha = 0.2)  
+plot_CA <- plot_CA + geom_ribbon(aes(ymin = low_sunny, ymax = upr_sunny), fill = "#A6BDDB", alpha = 0.2)
+plot_CA <- plot_CA + geom_line(aes(y = med_ocean), color = "#0570B0", size = 1) 
+plot_CA <- plot_CA + geom_line(aes(y = med_palo), color = "#FEC44F", size = 1) 
+plot_CA <- plot_CA + geom_line(aes(y = med_san), color = "#BD0026", size = 1) 
+plot_CA <- plot_CA + geom_line(aes(y = med_silicon), color = "#74C476", size = 1) 
+plot_CA <- plot_CA + geom_line(aes(y = med_south), color = "#6A51A3", size = 1) 
+plot_CA <- plot_CA + geom_line(aes(y = med_sunny), color = "#2B8CBE", size = 1) 
+plot_CA <- plot_CA + labs(y = "wastewater-based Re", x = "Month")
+plot_CA <- plot_CA + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
+plot_CA <- plot_CA + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
+plot_CA <- plot_CA + theme_bw()
+plot_CA <- plot_CA + theme(
   axis.line = element_line(linewidth = 1.0, lineend = "square"),
   text = element_text(colour ="black", size = 14),
   legend.position = "none",
   axis.ticks = element_line(linewidth = 1.5),
   axis.ticks.length = unit(-2, "mm"))
-plot
+plot_CA
 
 
 
@@ -61,49 +60,55 @@ plot
 
 
 #Colorado
-plot <- ggplot(data_IAV_R_CO, aes(x = as.Date(date)))
-plot <- plot + geom_ribbon(aes(ymin = low_north_1, ymax = upr_north_1), fill = "#3690C0", alpha = 0.3)  
-plot <- plot + geom_ribbon(aes(ymin = low_north_2, ymax = upr_north_2), fill = "#FEE391", alpha = 0.4)  
-plot <- plot + geom_line(aes(y = med_north_1), color = "#0570B0", size = 1) 
-plot <- plot + geom_line(aes(y = med_north_2), color = "#FEC44F", size = 1) 
-plot <- plot + labs(y = "wastewater-based Re", x = "Date")
-plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
-plot <- plot + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
-plot <- plot + theme_bw()
-plot <- plot + theme(
+plot_CO <- ggplot(data_RSV_R_CO, aes(x = as.Date(date)))
+plot_CO <- plot_CO + geom_ribbon(aes(ymin = low_north_1, ymax = upr_north_1), fill = "#3690C0", alpha = 0.3)  
+plot_CO <- plot_CO + geom_ribbon(aes(ymin = low_north_2, ymax = upr_north_2), fill = "#FEE391", alpha = 0.4)  
+plot_CO <- plot_CO + geom_line(aes(y = med_north_1), color = "#0570B0", size = 1) 
+plot_CO <- plot_CO + geom_line(aes(y = med_north_2), color = "#FEC44F", size = 1) 
+plot_CO <- plot_CO + labs(y = "wastewater-based Re", x = "Month")
+plot_CO <- plot_CO + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
+plot_CO <- plot_CO + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
+plot_CO <- plot_CO + theme_bw()
+plot_CO <- plot_CO + theme(
   axis.line = element_line(linewidth = 1.0, lineend = "square"),
   text = element_text(colour ="black", size = 14),
   legend.position = "none",
   axis.ticks = element_line(linewidth = 1.5),
   axis.ticks.length = unit(-2, "mm"))
-plot
+plot_CO
 
 
 
 
 
-plot <- ggplot(data_IAV_R_FL, aes(x = as.Date(date)))
-plot <- plot + geom_ribbon(aes(ymin = low_eastern, ymax = upr_eastern), fill = "#3690C0", alpha = 0.2)  
-plot <- plot + geom_ribbon(aes(ymin = low_north, ymax = upr_north), fill = "#FEE391", alpha = 0.2)
-plot <- plot + geom_ribbon(aes(ymin = low_south, ymax = upr_south), fill = "#FC9272", alpha = 0.2)  
-plot <- plot + geom_line(aes(y = med_eastern), color = "#0570B0", size = 1) 
-plot <- plot + geom_line(aes(y = med_north), color = "#FEC44F", size = 1) 
-plot <- plot + geom_line(aes(y = med_south), color = "#BD0026", size = 1) 
-plot <- plot + labs(y = "wastewater-based Re", x = "Date")
-plot <- plot + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
-plot <- plot + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
-plot <- plot + theme_bw()
-plot <- plot + theme(
+plot_FL <- ggplot(data_RSV_R_FL, aes(x = as.Date(date)))
+plot_FL <- plot_FL + geom_ribbon(aes(ymin = low_eastern, ymax = upr_eastern), fill = "#3690C0", alpha = 0.2)  
+plot_FL <- plot_FL + geom_ribbon(aes(ymin = low_north, ymax = upr_north), fill = "#FEE391", alpha = 0.2)
+plot_FL <- plot_FL + geom_ribbon(aes(ymin = low_south, ymax = upr_south), fill = "#FC9272", alpha = 0.2)  
+plot_FL <- plot_FL + geom_line(aes(y = med_eastern), color = "#0570B0", size = 1) 
+plot_FL <- plot_FL + geom_line(aes(y = med_north), color = "#FEC44F", size = 1) 
+plot_FL <- plot_FL + geom_line(aes(y = med_south), color = "#BD0026", size = 1) 
+plot_FL <- plot_FL + labs(y = "wastewater-based Re", x = "Month")
+plot_FL <- plot_FL + scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2023-06-01")), date_breaks = "2 months", date_labels = "%b")
+plot_FL <- plot_FL + scale_y_continuous(limits = c(0.5, 2.0), breaks = seq(0.5, 2.0, 0.5))
+plot_FL <- plot_FL + theme_bw()
+plot_FL <- plot_FL + theme(
   axis.line = element_line(linewidth = 1.0, lineend = "square"),
   text = element_text(colour ="black", size = 14),
   legend.position = "none",
   axis.ticks = element_line(linewidth = 1.5),
   axis.ticks.length = unit(-2, "mm"))
-plot
+plot_FL
 
 
-
-
+#width 350, hight: 500
+left_panel <- plot_grid(
+  plot_CA, plot_CO, plot_FL,
+  ncol = 1,
+  align = "v",
+  rel_heights = c(1.5, 1.5, 1.5)
+)
+left_panel
 
 
 
