@@ -62,6 +62,17 @@ model {
     } 
 }
 
+generated quantities {
+
+// Compute the predicted wastewater concentration with measurement errors
+  vector[n_all] generated_ww_observed  = rep_vector(0, n_all);
+  for (k in 1:n_all) {
+    generated_ww_observed[k] = normal_rng(mu[k], s2);
+  }
+
+
+}
+
 
 
 
