@@ -12,3 +12,5 @@
 2. [Result](https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Demonstration_toydata.csv)
 
 <img width="513" height="144" alt="image" src="https://github.com/user-attachments/assets/a9573ed1-0943-414d-baa3-7309858eaa29" />
+
+<img width="500" height="600" alt="image" src="https://github.com/Hiroki-Ando1998/202410_WBE_censored_data/blob/main/XX_Demonstration/Result_demonstration_wastewaterconcentration.svg"/>
