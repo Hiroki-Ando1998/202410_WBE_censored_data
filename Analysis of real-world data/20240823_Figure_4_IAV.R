@@ -49,14 +49,15 @@ mcmc <- stan(
   data = data_list_ww,
   seed = 1,
   chain = 4,
-  iter = 200000,
-  warmup = 10000,
+  iter = 400000,
+  warmup = 200000,
   thin = 4
 )
 
 print(mcmc, pars = c("c1", "c2", "s1", "s2"), probe = c(0.025, 0.50, 0.975))
 
 library(bayesplot)
+#width: 500, hight: 600
 mcmc_combo(mcmc, pars = c("c1", "c2", "s1", "s2"))
 
 
@@ -183,5 +184,6 @@ plot <- plot + theme(
   axis.ticks = element_line(linewidth = 1.5),
   axis.ticks.length = unit(-2, "mm"))
 plot
+
 
 
