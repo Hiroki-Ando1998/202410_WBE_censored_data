@@ -131,6 +131,13 @@ plot
 #Write file name: "2024xxxx_xx_xx,csv"
 write.csv(x = data_estimated_concentration, file = "C:/XXXX/2024XXXX_XX_XX.csv") 
 
+svg(
+  filename = "C:/XXXX/2024XXXX_XX_plot.svg",
+  width = 8,
+  height = 4
+)
+plot #chose plot
+dev.off()
 
 
 
@@ -189,6 +196,7 @@ plot
 #confirm the place where file should be loaded by using "getwd()": "C:/XXXX/"
 #Write file name: "2024xxxx_xx_xx,csv"
 write.csv(x = data_fig_logis, file = "C:/XXXX/2024XXXX_XX_XX.csv")
+
 
 
 
